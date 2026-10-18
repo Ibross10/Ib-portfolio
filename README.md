@@ -5,7 +5,7 @@ A responsive single-page portfolio showcasing my projects, testimonials, and con
 
 ## Live Demo
 
-Coming soon — the website will be published using GitHub Pages.
+https://ibross10.github.io/Ib-portfolio/
 
 ## Features
 
