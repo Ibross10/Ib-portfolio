@@ -159,3 +159,11 @@ footer {
         font-size: 24px;
     }
 }
+
+
+/* Accessibility: make keyboard focus visible on links */
+a:focus-visible {
+    outline: 3px solid #fca311;
+    outline-offset: 4px;
+    border-radius: 3px;
+}
