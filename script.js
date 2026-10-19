@@ -18,12 +18,14 @@ const projects = [
     {
         title: "Wordly Dictionary App",
         description: "A dictionary application that allows users to search for word meanings, explore definitions, and save favorite words.",
-        technologies: "HTML, CSS, JavaScript, Dictionary API"
+        technologies: "HTML, CSS, JavaScript, Dictionary API",
+        github: "https://github.com/Ibross10/wordly"
     },
     {
         title: "Trivia CLI Game",
         description: "An interactive command-line quiz game with multiple-choice questions, a timer, answer feedback, and a quit option.",
-        technologies: "JavaScript, Node.js"
+        technologies: "JavaScript, Node.js",
+        github: "https://github.com/Ibross10/trivia-cli"
     }
 ];
 
@@ -65,9 +67,18 @@ for (const project of projects) {
     technologies.className = "tech";
     technologies.textContent = `Technologies: ${project.technologies}`;
 
+
     card.appendChild(title);
     card.appendChild(description);
     card.appendChild(technologies);
 
+    const githubLink = document.createElement("a");
+    githubLink.href = project.github;
+    githubLink.textContent = "View Project on GitHub";
+    githubLink.target = "_blank";
+    githubLink.rel = "noopener noreferrer";
+
+    card.appendChild(githubLink);
     projectsList.appendChild(card);
+
 }
