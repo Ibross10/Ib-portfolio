@@ -82,3 +82,14 @@ for (const project of projects) {
     projectsList.appendChild(card);
 
 }
+const copyEmailButton = document.getElementById("copy-email");
+
+copyEmailButton.addEventListener("click", async () => {
+    try {
+        await navigator.clipboard.writeText("ibrahimabdi3760@gmail.com");
+        copyEmailButton.textContent = "Email Copied!";
+    } catch (error) {
+        copyEmailButton.textContent = "Copy failed — select the email above";
+    }
+});
+
