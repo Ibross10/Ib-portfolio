@@ -14,20 +14,24 @@ const testimonials = {
     }
 };
 
+
 const projects = [
     {
         title: "Wordly Dictionary App",
         description: "A dictionary application that allows users to search for word meanings, explore definitions, and save favorite words.",
         technologies: "HTML, CSS, JavaScript, Dictionary API",
-        github: "https://github.com/Ibross10/wordly"
+        github: "https://github.com/Ibross10/wordly",
+        category: "web"
     },
     {
         title: "Trivia CLI Game",
         description: "An interactive command-line quiz game with multiple-choice questions, a timer, answer feedback, and a quit option.",
         technologies: "JavaScript, Node.js",
-        github: "https://github.com/Ibross10/trivia-cli"
+        github: "https://github.com/Ibross10/trivia-cli",
+        category: "cli"
     }
 ];
+
 
 // Display testimonials on the page
 const testimonialsList = document.getElementById("testimonials-list");
@@ -50,38 +54,69 @@ for (const key in testimonials) {
     testimonialsList.appendChild(card);
 }
 
-// Display projects on the page
+
 const projectsList = document.getElementById("projects-list");
+const filterButtons = document.querySelectorAll(".filter-btn");
 
-for (const project of projects) {
-    const card = document.createElement("article");
-    card.className = "project-card";
+function displayProjects(category = "all") {
+    projectsList.innerHTML = "";
 
-    const title = document.createElement("h3");
-    title.textContent = project.title;
+    const filteredProjects = projects.filter((project) => {
+        return category === "all" || project.category === category;
+    });
 
-    const description = document.createElement("p");
-    description.textContent = project.description;
+    for (const project of filteredProjects) {
+        const card = document.createElement("article");
+        card.className = "project-card";
 
-    const technologies = document.createElement("p");
-    technologies.className = "tech";
-    technologies.textContent = `Technologies: ${project.technologies}`;
+        const title = document.createElement("h3");
+        title.textContent = project.title;
 
+        const description = document.createElement("p");
+        description.textContent = project.description;
 
-    card.appendChild(title);
-    card.appendChild(description);
-    card.appendChild(technologies);
+        const technologies = document.createElement("p");
+        technologies.className = "tech";
+        technologies.textContent = `Technologies: ${project.technologies}`;
 
-    const githubLink = document.createElement("a");
-    githubLink.href = project.github;
-    githubLink.textContent = "View Project on GitHub";
-    githubLink.target = "_blank";
-    githubLink.rel = "noopener noreferrer";
+        const githubLink = document.createElement("a");
+        githubLink.href = project.github;
+        githubLink.textContent = "View Project on GitHub";
+        githubLink.target = "_blank";
+        githubLink.rel = "noopener noreferrer";
 
-    card.appendChild(githubLink);
-    projectsList.appendChild(card);
+        card.appendChild(title);
+        card.appendChild(description);
+        card.appendChild(technologies);
+        card.appendChild(githubLink);
 
+        projectsList.appendChild(card);
+    }
 }
+
+filterButtons.forEach((button) => {
+    button.setAttribute(
+        "aria-pressed",
+        String(button.classList.contains("active"))
+    );
+
+    button.addEventListener("click", () => {
+        const selectedCategory = button.dataset.filter;
+
+        displayProjects(selectedCategory);
+
+        filterButtons.forEach((filterButton) => {
+            const isActive = filterButton === button;
+
+            filterButton.classList.toggle("active", isActive);
+            filterButton.setAttribute("aria-pressed", String(isActive));
+        });
+    });
+});
+
+displayProjects();
+
+
 const copyEmailButton = document.getElementById("copy-email");
 
 copyEmailButton.addEventListener("click", async () => {
